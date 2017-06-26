@@ -5,6 +5,8 @@
 *.log
 *.pch
 *.pdb
+packages/
+cmake/
 UpgradeLog.htm
 out/x64/Release_Static/kdlib.lib
 out/x64/Release_3.6/targetapp.exe
