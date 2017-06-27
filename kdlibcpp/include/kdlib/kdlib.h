@@ -8,6 +8,7 @@
 #include "kdlib/disasm.h"
 #include "kdlib/exceptions.h"
 #include "kdlib/eventhandler.h"
+#include "kdlib/busaccess.h"
 #include "kdlib/memaccess.h"
 #include "kdlib/module.h"
 #include "kdlib/process.h"

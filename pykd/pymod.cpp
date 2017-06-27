@@ -14,6 +14,7 @@
 #include "pydisasm.h"
 #include "pyevents.h"
 #include "pyeventhandler.h"
+#include "pybusaccess.h"
 #include "pymemaccess.h"
 #include "pymodule.h"
 #include "pysymengine.h"
@@ -39,7 +40,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS( startProcess_,  pykd::startProcess, 1, 2 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( attachProcess_, pykd::attachProcess, 1, 2);
 BOOST_PYTHON_FUNCTION_OVERLOADS( detachProcess_,  pykd::detachProcess, 0, 1 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( terminateProcess_,  pykd::terminateProcess, 0, 1 );
-BOOST_PYTHON_FUNCTION_OVERLOADS(closeDump_, pykd::closeDump, 0, 1);
+BOOST_PYTHON_FUNCTION_OVERLOADS( closeDump_, pykd::closeDump, 0, 1);
 BOOST_PYTHON_FUNCTION_OVERLOADS( attachKernel_,  pykd::attachKernel, 0, 1 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( evaluate_, pykd::evaluate, 1, 2 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( debugCommand_, pykd::debugCommand, 1, 2 );
@@ -48,6 +49,8 @@ BOOST_PYTHON_FUNCTION_OVERLOADS( dprint_, pykd::dprint, 1, 2 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( dprintln_, pykd::dprintln, 1, 2 );
 
 //BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( Module_findSymbol, Module::getSymbolNameByVa, 1, 2 );
+
+BOOST_PYTHON_FUNCTION_OVERLOADS( readBusData_, pykd::readBusData, 2, 3);
 
 BOOST_PYTHON_FUNCTION_OVERLOADS( loadChars_, pykd::loadChars, 2, 3 );
 BOOST_PYTHON_FUNCTION_OVERLOADS( loadWChars_, pykd::loadWChars, 2, 3 );
@@ -243,6 +246,10 @@ BOOST_PYTHON_MODULE( pykd )
     python::def( "bugCheckData", pykd::getBugCheckData,
         "Function reads the kernel bug check code and related parameters\n"
         "And return tuple: (code, arg1, arg2, arg3, arg4)" );
+
+	// Manage target bus access
+	python::def("setDouble", pykd::readBusData,
+		"Read bytes from bus");
 
     // Manage target memory access
     python::def( "addr64", pykd::addr64,
@@ -1126,6 +1133,10 @@ BOOST_PYTHON_MODULE( pykd )
         .def_readonly("process", &DebugEvent::process)
         .def_readonly("thread", &DebugEvent::thread)
         ;
+
+#ifdef Disasm
+#undef Disasm
+#endif
 
     python::class_<kdlib::Disasm>("disasm", "Class disassemble a processor instructions",python::no_init)
         .def( "__init__", python::make_constructor(pykd::loadDisasm ) )

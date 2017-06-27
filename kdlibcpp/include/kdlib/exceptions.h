@@ -36,7 +36,25 @@ private:
     static std::string getCStrDesc( const std::wstring &desc );
 
 };
+///////////////////////////////////////////////////////////////////////////////
+class BusException : public DbgWideException
+{
+public:
 
+	BusException(unsigned long busDataType, unsigned long busNumber, unsigned long slotNumber, unsigned long offset) :
+		DbgWideException(buildDesc(busDataType, busNumber, slotNumber, offset))
+	{}
+
+private:
+
+	static std::wstring buildDesc(unsigned long busDataType, unsigned long busNumber, unsigned long slotNumber, unsigned long offset)
+	{
+		std::wstringstream   sstr;
+		sstr << L"Bus exception at bus type " << busDataType << L" number " << busNumber << L" slot " << slotNumber << L" offset " << offset;
+
+		return sstr.str();
+	}
+};
 ///////////////////////////////////////////////////////////////////////////////
 
 class MemoryException : public DbgWideException

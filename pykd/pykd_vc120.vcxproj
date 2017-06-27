@@ -567,6 +567,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dbgexcept.h" />
+    <ClInclude Include="pybusaccess.h" />
     <ClInclude Include="pycpucontext.h" />
     <ClInclude Include="pydisasm.h" />
     <ClInclude Include="pydbgeng.h" />
@@ -591,6 +592,7 @@
   <ItemGroup>
     <ClCompile Include="dbgexcept.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pybusaccess.cpp" />
     <ClCompile Include="pycpucontext.cpp" />
     <ClCompile Include="pydbgeng.cpp" />
     <ClCompile Include="pyeventhandler.cpp" />

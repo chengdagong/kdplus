@@ -1,14 +1,19 @@
 #pragma once
 
-#include <Windows.h>
-#include <wdbgexts.h>
-
+#include <string>
 #include <vector>
+
+#include "kdlib/dbgtypedef.h"
+#include "kdlib/dbgengine.h"
 
 namespace kdlib {
 
 ///////////////////////////////////////////////////////////////////////////////
-std::vector<byte> readBusData(unsigned long busDataType, unsigned long busNumber, unsigned long slotNumber, unsigned long offset, unsigned long length);
+void readBus(unsigned long busDataType, unsigned long busNumber, unsigned long slotNumber, unsigned long offset, void* buffer, unsigned long length);
+
+///////////////////////////////////////////////////////////////////////////////
+
+std::vector<unsigned char> readBusData(unsigned long busDataType, unsigned long busNumber, unsigned long slotNumber, unsigned long offset, unsigned long length);
 ///////////////////////////////////////////////////////////////////////////////
 
 } // kdlib namespace end

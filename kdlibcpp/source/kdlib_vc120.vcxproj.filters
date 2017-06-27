@@ -121,6 +121,9 @@
     <ClCompile Include="busaccess.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="win\dbgbus.cpp">
+      <Filter>win</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
